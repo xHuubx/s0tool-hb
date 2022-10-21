@@ -22,7 +22,9 @@ esp8266:
     version: recommended     
   
  dashboard_import:
-  package_import_url: github://huizebruin/s0tool/esphome/pulscounter.yaml@beta
+  package_import_url: github.com/xHuubx/s0tool-hb/esphome/pulscounter.yaml
+  
+  #github.com/xHuubx/s0tool-hb/esphome/pulscounter.yaml
   
 wifi:
 
