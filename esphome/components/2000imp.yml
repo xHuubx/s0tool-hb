@@ -1,0 +1,41 @@
+ 
+#------------------------# Kwh meter S0 poort 1 #------------------------#
+sensor:
+# ⬇ kwh meter s0 ⬇ #
+  - platform: pulse_meter
+    pin: D5 
+    name:  "Actuele energie"
+    id: W_opbrengst
+    icon: "mdi:flash"
+#    internal_filter: ${impulslengte} 
+    accuracy_decimals: 3
+    unit_of_measurement: 'kW'
+    state_class: measurement
+    device_class: power
+    filters:
+      - lambda: return x * ((60.0 / atoi(id(Select_pulse_rate).state.c_str()))); 
+
+# ⬇ Totaal opgebracht ⬇ #    
+    total:
+      unit_of_measurement: 'kWh'
+      name: "Totaal opgebracht"
+      id: W_opbrengst_totaal
+      state_class: total_increasing
+      device_class: energy
+      icon: "mdi:flash"
+      accuracy_decimals: 2
+      filters:
+        - multiply: 0.001
+ #       - lambda: return x * ((1.0 / atoi(id(Select_pulse_rate).state.c_str()))); 
+
+# ⬇ Kwh meterstand ⬇ stand bij benadering #        
+  - platform: template
+    id: kwh_total
+    name: "Actuele meterstand"
+    state_class: "total_increasing"
+    icon: "mdi:flash"
+    update_interval: 1s
+    unit_of_measurement: 'kWh'
+    accuracy_decimals: 2
+    lambda: 
+      return id(W_opbrengst_totaal).state + id(totalkwhUsage);
