@@ -21,8 +21,8 @@ esp8266:
   framework:
     version: recommended     
   
-# dashboard_import:
-#   package_import_url: github://huizebruin/s0tool/esphome/pulscounter.yaml@beta
+ dashboard_import:
+  package_import_url: github://huizebruin/s0tool/esphome/pulscounter.yaml@beta
   
 wifi:
 
